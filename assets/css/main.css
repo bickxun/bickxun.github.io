@@ -194,7 +194,7 @@ input,
 select,
 textarea {
   color: #888;
-  font-family: "Lato", sans-serif;
+  font-family: "Verdana", sans-serif;
   font-size: 16pt;
   font-weight: 400;
   line-height: 1.75em;
@@ -340,7 +340,7 @@ pre code {
 }
 
 .align-left {
-  text-align: left;
+  text-align: justify;
 }
 
 .align-center {
