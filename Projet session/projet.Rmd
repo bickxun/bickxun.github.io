@@ -1,0 +1,44 @@
+---
+title: "Titre du rapport"
+author: "Buckinx Victor"
+date: "`r format(Sys.Date(), '%d %B %Y')`"
+output:
+  html_document:
+    toc: true        # Table des matières
+    toc_depth: 2     # Profondeur de la table des matières
+    toc_float: true  # Table des matières flottante
+    number_sections: true
+  pdf_document: default
+  word_document: default
+---
+
+# Introduction
+
+Ce document est rédigé en **R Markdown**.  
+Vous pouvez y insérer du texte, des formules mathématiques, du code R et des graphiques.
+
+# Revue de la littérature
+
+Ici revue de la litéblablabla
+
+# Jeu de données
+
+jeu de données blabla
+
+# Conclusion
+
+conclubalbal
+
+# Code R et graphique
+
+```{r setup, include=TRUE}
+# Charger les packages nécessaires
+library(ggplot2)
+
+# Jeu de données exemple
+data(mpg)
+
+# Graphique simple
+ggplot(mpg, aes(displ, hwy, colour = class)) +
+  geom_point() +
+  theme_minimal()
