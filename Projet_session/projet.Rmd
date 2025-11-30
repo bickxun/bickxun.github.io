@@ -13,7 +13,7 @@ output:
 <div style="text-align: center;">
 <div style="text-align: justify;">
 
-# Question de recherche
+# Question de recherche et hypothèses
 
 Il existait un blocage générationnel historique et croissant au sein de l'Assemblée nationale française. En 2007, elle affichait l'une des moyennes d’âge les plus élevées du continent, avec neuf députés seniors pour un junior. Les générations précocement élues (notamment celles issues de la Résistance en 1946 et les baby-boomers en 1981) ont maintenu leur emprise durablement, empêchant la relève et créant des « générations creuses » politiquement (Chauvel, 2007). Néanmoins, cette tendance est n'es plus d'actualité, les partis émergents (LREM en 2017, LFI et RN en 2022) ont recruté des candidats plus jeunes pour incarner le changement (Michon, 2023). De ce constat, la question suivante doit être posée : quelle est l’évolution de l'âge des parlementaire siègeant à l'assemblée nationale depuis la 12ème législature ?
 
@@ -108,10 +108,25 @@ H2 est vérifiée. Les parlementaires siègeant à l'Assemblée nationale semble
 
 Néanmoins ce résultat est à questionner. En effet, les données semblent incomplète et/ou manquante. Le graphique en barre souligne un nombre de députés par législature or, le nombre de député est fixé à 577. Ainsi des données sont manquantes (législature 12 à 16) et erronées (législature 17). Les données sont incomplètes. Les résultats présentés ne sont pas robuste. 
 
+# Outils utilisés
 
-Ce travail de fin de session est un prétexte afin de suivre le cycle de la recherche et de passer en revue les principaux outils abordés en cours. Elicit m'a permis d'élaborer une question de recherche pertinente et un état de la littérature, Notion m'a permis de m'organiser de manière efficace et l'IA a su me sortir de certaines impasses, tant au niveau du code R que dans l'élaboration de la recherche.
+Ce travail de fin de session est un prétexte afin de suivre le cycle de la recherche et de passer en revue les principaux outils abordés en cours. Elicit m'a permis d'élaborer une question de recherche pertinente et un état de la littérature, Notion m'a permis de m'organiser de manière efficace et l'IA a su me sortir de certaines impasses, tant au niveau du code R que dans l'élaboration de la recherche. Plus précisément, la recherche d'article pertinent s'est faite sur Google Scholar par l'intermédiaire d'Elicit. Zotero es très utile pour regrouper, organiser les sources et citer les documents.
 
 R est le langage le plus avantageux pour la lecture, l’analyse et la visualisation de mes données. D'autant plus que le projet en R Markdown permet d'intégrer le code R de manière lisible à la recherche. Ce projet de fin de session m'a permis de me familiariser avec les outils du numérique en recherche en sciences sociales, plus précisément à manipuler et visualiser des données à l'aide de différents packages.
+
+Le choix de mes outils numériques de fins de sessions ont été guidé par la philosophie de l'open source, à savoir : 
+
+1. **l'accessibilité** : R, Zotero, IA, Elicit, Notion.
+
+2. **l'existence d'une communauté d'utilisateurs** : Notion, Zotero, R.
+
+3. **la popularité** : R pour la recherche en science sociale, Notion pour l'organisation des tâches, Zotero pour l'organisation des sources.
+
+4. **leur compatibilité avec d'autres outils** : Code R intégré au R Markdown.
+
+5. **le besoin de transparence et la réplicabilité** : la manière dont j'ai utilisés les outils sont expliqué, de plus, le tout est disponible sur mon github.
+
+6. **capacité d'adaptabilité et de flexibilité des outils**
 
 # Bibliographie 
 
