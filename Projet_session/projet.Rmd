@@ -1,7 +1,6 @@
 ---
-title: "Titre du rapport"
+title: "POL-6078"
 author: "Buckinx Victor"
-date: "`r format(Sys.Date(), '%d %B %Y')`"
 output:
   html_document:
     toc: true        # Table des matières
@@ -11,34 +10,113 @@ output:
   pdf_document: default
   word_document: default
 ---
+<div style="text-align: center;">
+<div style="text-align: justify;">
 
-# Introduction
+# Question de recherche
 
-Ce document est rédigé en **R Markdown**.  
-Vous pouvez y insérer du texte, des formules mathématiques, du code R et des graphiques.
+Il existait un blocage générationnel historique et croissant au sein de l'Assemblée nationale française. En 2007, elle affichait l'une des moyennes d’âge les plus élevées du continent, avec neuf députés seniors pour un junior. Les générations précocement élues (notamment celles issues de la Résistance en 1946 et les baby-boomers en 1981) ont maintenu leur emprise durablement, empêchant la relève et créant des « générations creuses » politiquement (Chauvel, 2007). Néanmoins, cette tendance est n'es plus d'actualité, les partis émergents (LREM en 2017, LFI et RN en 2022) ont recruté des candidats plus jeunes pour incarner le changement (Michon, 2023). De ce constat, la question suivante doit être posée : quelle est l’évolution de l'âge des parlementaire siègeant à l'assemblée nationale depuis la 12ème législature ?
 
-# Revue de la littérature
 
-Ici revue de la litéblablabla
+H1: Il n'existe pas de rajeunissement de l'Assemblée nationale. 
+
+H2: Il existe un rajeunissement de l'Assemblée nationale.
+
+# Méthode 
+
+Après avoir téléchargé le fichier .csv, j'ai cherché à importer les donées sur R et à écrire un script qui permettait de répondre à la question de recherche.
+
+J'ai d'abord converti de la date pour l'adapter au format JJ/MM/AAAA. Ensuite j'ai cherché à calculer l'âge actuel des parlementaires, en supprimant les NA. Grâce à cela, j'ai pu calculer l'écart-type par législature ainsi que regrouper les âge par décennies afin de visualiser les données à travers deux graphiques. Le premier illustrant l'écart-type par législature et le second illustrant la représentation par décennie par législature.
 
 # Jeu de données
 
-jeu de données blabla
+Le jeu de données recense tous les parlementaires siégeant à l'Assemblée nationale depuis la 12<sup>e</sup> législature. Sont présents : le numéro de leur législature, la civilité, le nom, le prénom, la ville de naissance, la date de naissance, l'âge, le groupe politique, le groupe politique dans sa forme abrégée, le nom et le code du département, la circonscription, la date de prise de fonction, la profession, les contacts (mail, Twitter, Facebook, site internet), le nombre de mandats, l'expérience député, le score de participation et le score de participation selon la spécialité, le score de loyauté envers le groupe politique, le score de majorité, l’activité, et la date de mise à jour.
+
+Le jeu est issu d'un site gouvernemental et est régulièrement mis à jour. Après un bon nettoyage des données, toutes les variables pertinentes pour répondre à ma question de recherche sont présentes. J’estime que les quatre provinces permettent de faire une bonne recherche et de voir des tendances.
+
+J'ai récupérer les données suivantes à l'adresse suivantes : 
+https://www.data.gouv.fr/datasets/historique-des-deputes-de-lassemblee-nationale-depuis-2002-informations-et-statistiques/
+
+# Code R et graphiques
+```{r setup, include=TRUE}
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(lubridate)
+
+# 1. Importer les données
+data <- read_csv("C:/Users/Victo/OneDrive/Bureau/Etude/ULaval/Session Automne/Outils numériques pour sc.so/Projet/deputes-historique.csv")
+
+# 2. Conversion de la date (adapter si format JJ/MM/AAAA)
+data <- data %>%
+  mutate(dateNais = ymd(naissance))
+         
+# 3. Calculer l'âge actuel
+data <- data %>%
+  mutate(age = as.numeric(difftime(Sys.Date(), naissance, units = "days")) / 365.25)
+
+# Supprimer les NA
+data <- data %>% filter(!is.na(age))
+
+# 4. Écart-type par législature
+age_stats <- data %>%
+  group_by(legislatureLast) %>%
+  summarise(ecart_type = sd(age, na.rm = TRUE), .groups = "drop")
+
+# 5. Regrouper par décennie
+data <- data %>%
+  mutate(decennie = paste0(floor(age / 10) * 10, "-", floor(age / 10) * 10 + 9))
+
+decennie_stats <- data %>%
+  group_by(legislatureLast, decennie) %>%
+  summarise(count = n(), .groups = "drop")
+
+# 6. Graphique : écart-type par législature
+ggplot(age_stats, aes(x = legislatureLast, y = ecart_type)) +
+  geom_line(color = "red", size = 1) +
+  geom_point(color = "darkred") +
+  labs(title = "Écart-type des âges par législature",
+       x = "Législature", y = "Écart-type") +
+  theme_minimal()
+
+# 7. Graphique : répartition par décennie
+ggplot(decennie_stats, aes(x = factor(legislatureLast), y = count, fill = decennie)) +
+  geom_bar(stat = "identity", position = "stack") +
+  labs(title = "Répartition des âges par décennie et législature",
+       x = "Législature", y = "Nombre de députés", fill = "Décennie") +
+  theme_minimal()
+
+```
+
+# Discussion
+
+Ces données montrent que, si la moyenne d'âge globale des députés reste relativement stable autour de 48 à 49 ans en 2022-2024, la proportion des députés plus jeunes, notamment ceux en dessous de 40 ans, a augmenté significativement depuis 2017 avec l'arrivée des partis émergents. Ce phénomène confirme un certain rajeunissement de l'Assemblée nationale, même si la moyenne d'âge moyenne reste encore élevée à cause de la présence continue de nombreux députés plus âgés. Le député le plus jeune était âgé de 22 ans en 2024, tandis que le doyen avait 81 ans, ce qui témoigne d'une plus grande diversité générationnelle.
+
+La visualisation choisie est un graphique à ligne brisée qui suit l’évolution de l'écart-type des parlementaires d’une législature par rapport à une autre. Le graphique met en évidence une évolution notable de la dispersion des âges des députés à l’Assemblée nationale entre les législatures 12 et 17. Après une légère baisse entre les législatures 12 et 13 (écart-type passant d’environ 9 à 8 ans), la tendance s’inverse à partir de la 14e législature, avec une augmentation continue jusqu’à atteindre près de 12 ans à la 17e législature. 
+
+Cette hausse traduit une diversification progressive des profils en termes d’âge : les législatures récentes accueillent à la fois des députés plus jeunes et des parlementaires expérimentés. L’accroissement observé après 2012 peut s’expliquer par des stratégies de renouvellement politique, une ouverture des partis à des générations variées et des réformes favorisant la diversité des candidatures. 
+
+Le second graphique en barre présente la distribution des âges des députés à l’Assemblée nationale, regroupés par décennies, pour les législatures 12 à 17. On observe une évolution marquée dans la composition générationnelle des élus. Les législatures 12 et 13 sont dominées par des députés âgés de 50 à 69 ans, avec une présence notable des tranches 70-79 ans et quelques individus au-delà de 80 ans. À partir de la 14e législature, la structure change : la proportion des députés dans les tranches 40-49 ans et 30-39 ans augmente sensiblement, traduisant un rajeunissement progressif. Cette tendance s’accentue à la 17e législature, où les groupes 30-39 ans et 40-49 ans deviennent majoritaires, tout en conservant une représentation significative des 50-59 ans. La présence marginale de tranches extrêmes (moins de 30 ans ou plus de 80 ans) reste rare mais visible. 
 
 # Conclusion
 
-conclubalbal
+Ces évolutions suggèrent une Assemblée nationale de plus en plus intergénérationnelle, reflétant une volonté d’élargir la représentativité.Globalement, il existe une ouverture croissante à des générations plus jeunes, renforçant la diversité intergénérationnelle au sein de l’Assemblée nationale. La visualisation permet alors de répondre aux deux hypothèses.
 
-# Code R et graphique
+H1 est réfutée.
 
-```{r setup, include=TRUE}
-# Charger les packages nécessaires
-library(ggplot2)
+H2 est vérifiée. Les parlementaires siègeant à l'Assemblée nationale semblent de plus en plus jeune.
 
-# Jeu de données exemple
-data(mpg)
+Néanmoins ce résultat est à questionner. En effet, les données semblent incomplète et/ou manquante. Le graphique en barre souligne un nombre de députés par législature or, le nombre de député est fixé à 577. Ainsi des données sont manquantes (législature 12 à 16) et erronées (législature 17). Les données sont incomplètes. Les résultats présentés ne sont pas robuste. 
 
-# Graphique simple
-ggplot(mpg, aes(displ, hwy, colour = class)) +
-  geom_point() +
-  theme_minimal()
+
+Ce travail de fin de session est un prétexte afin de suivre le cycle de la recherche et de passer en revue les principaux outils abordés en cours. Elicit m'a permis d'élaborer une question de recherche pertinente et un état de la littérature, Notion m'a permis de m'organiser de manière efficace et l'IA a su me sortir de certaines impasses, tant au niveau du code R que dans l'élaboration de la recherche.
+
+R est le langage le plus avantageux pour la lecture, l’analyse et la visualisation de mes données. D'autant plus que le projet en R Markdown permet d'intégrer le code R de manière lisible à la recherche. Ce projet de fin de session m'a permis de me familiariser avec les outils du numérique en recherche en sciences sociales, plus précisément à manipuler et visualiser des données à l'aide de différents packages.
+
+# Bibliographie 
+
+Michon, S. (2023). Le recrutement des députés sous la Cinquième République : entre professionnalisation et renouvellement. Revue française de science politique, 73(2), 245-268.
+
+Chauvel L. (2007). L’âge de l’Assemblée (1946-2007), Soixante ans de renouvellement du corps législatif : bientôt, la troisième génération. La vie des idées, Collège de France.
+
+</div>
