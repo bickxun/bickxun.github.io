@@ -15,12 +15,12 @@ output:
 
 # Question de recherche et hypothèses
 
-Il existait un blocage générationnel historique et croissant au sein de l'Assemblée nationale française. En 2007, elle affichait l'une des moyennes d’âge les plus élevées du continent, avec neuf députés seniors pour un junior. Les générations précocement élues (notamment celles issues de la Résistance en 1946 et les baby-boomers en 1981) ont maintenu leur emprise durablement, empêchant la relève et créant des « générations creuses » politiquement (Chauvel, 2007). Néanmoins, cette tendance est n'es plus d'actualité, les partis émergents (LREM en 2017, LFI et RN en 2022) ont recruté des candidats plus jeunes pour incarner le changement (Michon, 2023). De ce constat, la question suivante doit être posée : quelle est l’évolution de l'âge des parlementaire siègeant à l'assemblée nationale depuis la 12ème législature ?
+Il existait un blocage générationnel historique et croissant au sein de l'Assemblée nationale française. En 2007, elle affichait l'une des moyennes d’âge les plus élevées du continent, avec neuf députés seniors pour un junior. Les générations précocement élues (notamment celles issues de la Résistance en 1946 et les baby-boomers en 1981) ont maintenu leur emprise durablement, empêchant la relève et créant des « générations creuses » politiquement (Chauvel, 2007). Néanmoins, cette tendance est n'es plus d'actualité, les partis émergents (LREM en 2017, LFI et RN en 2022) ont recruté des candidats plus jeunes pour incarner le changement (Michon, 2023). De ce constat, la question suivante doit être posée : **quelle est l’évolution de l'âge des parlementaire siègeant à l'assemblée nationale depuis la 12ème législature ?**
 
 
-H1: Il n'existe pas de rajeunissement de l'Assemblée nationale. 
+*H1: Il n'existe pas de rajeunissement de l'Assemblée nationale.*
 
-H2: Il existe un rajeunissement de l'Assemblée nationale.
+*H2: Il existe un rajeunissement de l'Assemblée nationale.*
 
 # Méthode 
 
@@ -102,9 +102,9 @@ Le second graphique en barre présente la distribution des âges des députés �
 
 Ces évolutions suggèrent une Assemblée nationale de plus en plus intergénérationnelle, reflétant une volonté d’élargir la représentativité.Globalement, il existe une ouverture croissante à des générations plus jeunes, renforçant la diversité intergénérationnelle au sein de l’Assemblée nationale. La visualisation permet alors de répondre aux deux hypothèses.
 
-H1 est réfutée.
+*H1 est réfutée.*
 
-H2 est vérifiée. Les parlementaires siègeant à l'Assemblée nationale semblent de plus en plus jeune.
+*H2 est vérifiée. Les parlementaires siègeant à l'Assemblée nationale semblent de plus en plus jeune.*
 
 Néanmoins ce résultat est à questionner. En effet, les données semblent incomplète et/ou manquante. Le graphique en barre souligne un nombre de députés par législature or, le nombre de député est fixé à 577. Ainsi des données sont manquantes (législature 12 à 16) et erronées (législature 17). Les données sont incomplètes. Les résultats présentés ne sont pas robuste. 
 
